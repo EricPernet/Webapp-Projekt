@@ -1,0 +1,36 @@
+<!-- 
+============================================================================
+*    Dokumentname: login.html
+*    Beschreibung: html-Programm für die Login-Seite von Streamforge, Webprojekt FS2025
+*    Copyright:    keine
+*    Erstellt:     2025-04-30
+*    Autoren:      Kjell Mühlhoff, Eric Pernet
+============================================================================
+-->
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Streamforge - Login</title> 
+    <script src ="_dbquery.js" async> </script>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+
+  <body>
+    <!--Überschrift zur Login-Aufforderung und Titel der Webseite-->
+    <h1 data-text="StreamForge">StreamForge</h1>
+    <h2> Bitte logge dich mit deinem Account ein</h2>
+
+    <!-- Eingabeaufforderung für den Benutzernamen -->
+    <h3>Benutzername:</h3>
+    <input id="benutzername" placeholder="Gib deinen Benutzernamen ein">
+
+    <!-- Eingabeaufforderung für das Passwort -->
+    <h3>Passwort:</h3>
+    <input type="password" id="passwort" placeholder="Gib dein Passwort ein!">
+
+    <!-- Login-Button ruft beim Anklicken die Login-Funktion auf -->
+    <button id="Loginbutton" onclick="login();">Login</button>
+  </body>
+
+</html>
