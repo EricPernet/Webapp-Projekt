@@ -20,9 +20,20 @@
     <h2>Playlist erstellen</h2>
     <input id = "InsertTitel" placeholder="Titel der Playlist" >
     <input id = "InsertPlaylist" placeholder="Gib eine deiner Playlists an!" >
-    <button id = "playlistbutton" onclick ="insertSong();">Erstellen</button>
+    <button id = "playlistbutton" onclick ="insertSong();">Song hinzufügen/entfernen</button>
     <p id="playliständerung"></p>
+
+    <!-- Bedienungs-Knöpfe für die administration der Playlists (Siehe JS für Funktionen)-->
+    <button id = "Playlistbutton" onclick ="searchPlaylist();">Playlist anzeigen</button>
+    <button id = "Playlistbutton" onclick ="followPlaylist();">Playlist folgen/entfolgen</button>
+    <button id = "Playlistbutton" onclick ="showPlaylist();">Gefolgte Playlists anzeigen</button>
+
+    <p id="playliständerung"></p>
+    <p id="Playlistlieder"></p>
+
+    
     <!--Knopf, um auf die Homepage zurück zu kommen-->
     <a id="Homepagebutton" onclick = "Homepage();">⌂ Zurück zur Homepage</a>
+
   </body>
 </html>
