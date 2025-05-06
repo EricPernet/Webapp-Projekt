@@ -1,39 +1,52 @@
 <!-- 
 ============================================================================
-*    Dokumentname: Playlist.html
-*    Beschreibung: html-Programm für die Playlist-Seite von Streamforge, Webprojekt FS2025
+*    Dokumentname: Playlists.html
+*    Beschreibung: HTML-Datei für die Playlist-Seite von Streamforge (Webprojekt FS2025)
 *    Copyright:    keine
 *    Erstellt:     2025-04-02
 *    Autoren:      Kjell Mühlhoff, Eric Pernet
 ============================================================================
 -->
+
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Streamforge-Playlist</title>
     <script src="_dbquery.js" defer></script>
     <link rel="stylesheet" href="style.css"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
+
   <body>
-    <!--Eingabefelder und Suchknopf für das Hinzufügen von Songs in die persönliche Playlist-->
-    <h2>Playlist erstellen</h2>
-    <input id = "InsertTitel" placeholder="Titel der Playlist" >
-    <input id = "InsertPlaylist" placeholder="Gib eine deiner Playlists an!" >
-    <button id = "playlistbutton" onclick ="insertSong();">Song hinzufügen/entfernen</button>
+    <!-- Überschrift für den Playlist-Bereich -->
+    <h2>Playlist verändern</h2>
+
+    <!-- Eingabefeld für den Titel des Songs, der zur Playlist hinzugefügt werden soll -->
+    <input id="InsertTitel" placeholder="Titel des Songs">
+
+    <!-- Eingabefeld für die Ziel-Playlist -->
+    <input id="InsertPlaylist" placeholder="Gib eine deiner Playlists an!">
+
+    <!-- Button zur Durchführung des Einfügevorgangs -->
+    <button id="playlistbutton" onclick="insertSong();">Ändern</button>
+
+    <!-- Button zur Anzeige der Inhalte einer Playlist -->
+    <button id="Playlistbutton" onclick="searchPlaylist();">Playlist anzeigen</button>
+
+    <!-- Button zum Folgen oder Entfolgen einer Playlist -->
+    <button id="Playlistbutton" onclick="followPlaylist();">Playlist folgen/entfolgen</button>
+
+    <!-- Button zur Anzeige aller Playlists, denen der Benutzer folgt -->
+    <button id="Playlistbutton" onclick="showPlaylist();">Gefolgte Playlists anzeigen</button>
+
+    <!-- Hier wird die Rückmeldung über Änderungen an der Playlist ausgegeben -->
     <p id="playliständerung"></p>
 
-    <!-- Bedienungs-Knöpfe für die administration der Playlists (Siehe JS für Funktionen)-->
-    <button id = "Playlistbutton" onclick ="searchPlaylist();">Playlist anzeigen</button>
-    <button id = "Playlistbutton" onclick ="followPlaylist();">Playlist folgen/entfolgen</button>
-    <button id = "Playlistbutton" onclick ="showPlaylist();">Gefolgte Playlists anzeigen</button>
-
-    <p id="playliständerung"></p>
+    <!-- Hier werden die Inhalte der Playlists angezeigt -->
     <p id="Playlistlieder"></p>
 
-    
-    <!--Knopf, um auf die Homepage zurück zu kommen-->
-    <a id="Homepagebutton" onclick = "Homepage();">⌂ Zurück zur Homepage</a>
+    <!-- Link zurück zur Startseite -->
+    <a id="Homepagebutton" onclick="Homepage();">⌂ Zurück zur Homepage</a>
 
   </body>
 </html>
