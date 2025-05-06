@@ -1,0 +1,90 @@
+<!-- 
+============================================================================
+*    Dokumentname: _dbquery.html
+*    Beschreibung: html-Programm für die Homepage von Streamforge, Webprojekt FS2025
+*    Copyright:    keine
+*    Erstellt:     2025-02-12
+*    Autoren:      Kjell Mühlhoff, Eric Pernet
+============================================================================
+-->
+
+<html>
+  <head>
+    <meta charset="UTF-8"> <!-- Zeichensatzdefinition -->
+    <title>Streamforge-Home</title> <!-- Titel im Browser-Tab -->
+
+    <!-- JavaScript wird eingebunden, Ausführung erfolgt nach dem Parsen -->
+    <script src="_dbquery.js" defer></script> 
+
+    <!-- Einbindung des CSS-Skripts -->
+    <link rel="stylesheet" href="style.css"/>
+
+    <!-- Optimierung für mobile Geräte -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <!-- Header der Seite mit Titelschrift ("Streamforge") -->
+    <header>
+      <h1 data-text="StreamForge">StreamForge</h1>
+      <h2>By Kjell & Eric</h2>
+    </header>
+    
+    <!-- Eingabefeld für die Suche der Lieder -->
+    <input id="Suche" placeholder="Suche">
+
+    <!-- Dropdown-Menü zur Auswahl der Art von Suche, z.B. Songtitel oder Albumtitel -->
+    <div class="dropdown">
+      <button class="dropbtn">Suche nach</button>
+      <div class="dropdown-content">
+        <!-- Aufruf der Suchfunktionen aus dem JavaScript -->
+        <a onclick="songHandler()">Song</a>
+        <a onclick="albumHandler();">Album</a>
+        <a onclick="genreHandler();">Genre</a>
+      </div>
+    </div> 
+
+    <!-- Navigationsleiste rechts -->
+    <div class="sidenav">
+      <a onclick="playlistswebsite();">Playlists</a>
+      <a onclick="impressumwebsite();">Impressum</a>
+    </div>
+
+    <!-- Hier werden die Ergebnisse der Suche mit den entsprechenden Titeln aufgeführt -->
+    <div>
+      <h3 id="answerSongTITEL"></h3>           <!-- Titel "Song:" -->
+      <h3 id="answerLIEDERTITEL"></h3>         <!-- Titel für Liedliste bei Genres -->
+      <p id="Genrelist"></p>                   <!-- Liste von Liedern bei Suche nach dem Genre -->
+      <p id="answerTitel"></p>                 <!-- Titel der ausgegebenen Songs -->
+      
+      <h3 id="answerAlbumTITEL"></h3>          <!-- Titel "Album:" -->
+      <p id="answerAlbum"></p>                 <!-- Albumname -->
+      
+      <h3 id="answerMusikerTITEL"></h3>        <!-- Titel "Musiker:" -->
+      <p id="answerMusician"></p>              <!-- Name des Musikers/Der Musikgruppe -->
+      
+      <h3 id="answerURLTITEL"></h3>            <!-- Titel "URL:" -->
+      <p id="answerURL"></p>                   <!-- Youtube-URL des Songs -->
+      
+      <h3 id="answerErscheinungsdatumTITEL"></h3> <!-- Titel "Erscheinungsdatum:" -->
+      <p id="answerDate"></p>                  <!-- Erscheinungsdatum der Songs-->
+      
+      <h3 id="answerGenreTITEL"></h3>          <!-- Titel "Genre:" -->
+      <p id="answerGenre"></p>                 <!-- Genre des Songs/Albums-->
+    </div>
+
+    <!-- Eingebetteter YouTube-Player (Mit Embed-Link aus Youtube) -->
+    <iframe 
+      id="URL" 
+      width="560" 
+      height="315" 
+      style="justify-content: center; display: flex;" 
+      src="https://www.youtube.com/embed/1JPwiLeo4WY?si=BBUravmbzrZBVw2t"
+      title="YouTube video player" 
+      frameborder="100" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+    </iframe>
+  </body>
+</html>
