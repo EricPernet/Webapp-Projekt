@@ -1,256 +1,86 @@
-/*
+<!-- 
 ============================================================================
-* Dokumentname: _dbquery.js
-* Beschreibung: JavaScript für die Streamforge-Webseite Webprojekt FS2025
-* Autoren:      Kjell Mühlhoff, Eric Pernet
+*    Dokumentname: _dbquery.html
+*    Beschreibung: HTML-Datei für die Homepage von Streamforge (Webprojekt FS2025)
+*    Copyright:    keine
+*    Erstellt:     2025-02-12
+*    Autoren:      Kjell Mühlhoff, Eric Pernet
 ============================================================================
-*/
+-->
 
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Streamforge-Home</title>
+    <script src="_dbquery.js" defer></script> 
+    <link rel="stylesheet" href="style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
-//URL der Webseite
-const url = 'http://localhost:8080/';
+  <body>
+    <!-- Haupt-Titel -->
+    <header>
+      <h1 data-text="StreamForge">StreamForge</h1>
+      <h2>By Kjell & Eric</h2>
+    </header>
 
-// HTML-Elemente referenzieren
-let Suche = document.getElementById("Suche");
-let answerMusician = document.getElementById("answerMusician");
-let answerURL = document.getElementById("answerURL");
-let videoFrame = document.getElementById("URL");
-let answerGenre = document.getElementById("answerGenre");
-let answerDate = document.getElementById("answerDate");
-let answerAlbum = document.getElementById("answerAlbum");
-let answerTitel = document.getElementById("answerTitel");
-let Genrelist = document.getElementById("Genrelist");
+    <!-- Suchfeld zur Suche der Songs/Alben/Genres -->
+    <input id="Suche" placeholder="Suche">
 
-// Titelfelder
-let answerSongTITEL = document.getElementById("answerSongTITEL");
-let answerAlbumTITEL = document.getElementById("answerAlbumTITEL");
-let answerGenreTITEL = document.getElementById("answerGenreTITEL");
-let answerErscheinungsdatumTITEL = document.getElementById("answerErscheinungsdatumTITEL");
-let answerMusikerTITEL = document.getElementById("answerMusikerTITEL");
-let answerURLTITEL = document.getElementById("answerURLTITEL");
-let answerLIEDERTITEL = document.getElementById("answerLIEDERTITEL");
+    <!-- Dropdown-Menü zur Auswahl der Kategorie (also nach dem, was gesucht werden soll) -->
+    <div class="dropdown">
+      <button class="dropbtn">Suche nach</button>
+      <div class="dropdown-content">
+        <!-- Beim anklicken werden die folgenden FUnktionen im JS aufgerufen -->
+        <a onclick="songHandler()">Song</a>
+        <a onclick="albumHandler();">Album</a>
+        <a onclick="genreHandler();">Genre</a>
+      </div>
+    </div> 
 
-let InsertTitel = document.getElementById("InsertTitel");
-let InsertPlaylist = document.getElementById("InsertPlaylist");
-let playliständerung = document.getElementById("playliständerung");
-let Playlistlieder = document.getElementById("Playlistlieder");
-let loginbestätigung = document.getElementById("loginbestätigung");
-let passwort = document.getElementById("passwort");
-let benutzername = document.getElementById("benutzername");
+    <!-- Seitenmenü für Navigation (Impressum, Playlists) -->
+    <div class="sidenav">
+      <a onclick="playlistswebsite();">Playlists</a>
+      <a onclick="impressumwebsite();">Impressum</a>
+    </div>
 
-// Song-Suchfunktion:
-async function songHandler() {
-    if (Suche.value !== '') {
-        try {
-            let response = await fetch(url + 'db/Titel/' + Suche.value);
-            if (response.ok) {
-                let json = await response.json();   //Unten werden alle Elemente aus der Datenbank ausgegeben, die dem "Titel" entsprechen
-                Suche.textContent = json[0].Titel;
-                answerTitel.textContent = json[0].Titel;
-                answerMusician.textContent = json[0].Künstler;
-                answerURL.textContent = json[0].URL;
-                answerDate.textContent = json[0].Erstellungsdatum;
-                answerAlbum.textContent = json[0].Album;
-                answerGenre.textContent = json[0].Genre;
+    <!-- Bereich für dynamisch generierte Ergebnisse -->
+    <div>
+      <!-- Titel der Suchergebnisse (Untertitel und Inhalte) -->
+      <h3 id="answerSongTITEL"></h3>
+      <h3 id="answerLIEDERTITEL"></h3>
+      <p id="Genrelist"></p>
 
-                // Einzelne Untertitel für Ergebnisse
-                answerSongTITEL.textContent = "Song:";
-                answerAlbumTITEL.textContent = "Album:";
-                answerGenreTITEL.textContent = "Genre:";
-                answerErscheinungsdatumTITEL.textContent = "Erscheinungsdatum:";
-                answerMusikerTITEL.textContent = "Musiker:";
-                answerURLTITEL.textContent = "URL:";
-                answerLIEDERTITEL.textContent = "";
-                Genrelist.textContent = "";
+      <p id="answerTitel"></p>
 
-                videoFrame.src = json[0].URL;
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-}
+      <h3 id="answerAlbumTITEL"></h3>
+      <p id="answerAlbum"></p>
 
-//Suchfunktion nach Album (Funktioniert gleich wie "SongHandler()")
+      <h3 id="answerMusikerTITEL"></h3>
+      <p id="answerMusician"></p>
 
-async function albumHandler() {
-    if (Suche.value !== '') {
-        try {
-            let response = await fetch(url + 'db/Album/' + Suche.value);
-            if (response.ok) {
-                let json = await response.json();
-                Suche.textContent = json[0].Album;
-                answerTitel.textContent = json[0].Titel;
-                answerMusician.textContent = json[0].Künstler;
-                answerDate.textContent = json[0].Erstellungsdatum;
-                answerAlbum.textContent = json[0].Album;
-                answerGenre.textContent = json[0].Genre;
+      <h3 id="answerURLTITEL"></h3>
+      <p id="answerURL"></p> 
 
-                answerSongTITEL.textContent = "";
-                answerAlbumTITEL.textContent = "Album:";
-                answerGenreTITEL.textContent = "Genre:";
-                answerErscheinungsdatumTITEL.textContent = "Erscheinungsdatum:";
-                answerMusikerTITEL.textContent = "Musiker:";
-                answerLIEDERTITEL.textContent = "Lieder:";
+      <h3 id="answerErscheinungsdatumTITEL"></h3>
+      <p id="answerDate"></p>
 
-                videoFrame.src = json[0].URL;
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-}
+      <h3 id="answerGenreTITEL"></h3>
+      <p id="answerGenre"></p>
+    </div>
 
-//Suchfunktion nach Genre (Ebenfalls gleiche Funktionsweise)
-async function genreHandler() {
-    if (Suche.value !== '') {
-        try {
-            let response = await fetch(url + 'db/Genre/' + Suche.value);
-            if (response.ok) {
-                let json = await response.json();
-
-                answerLIEDERTITEL.textContent = "Lieder:";
-
-                // Felder leeren, da diese bei der Ausgabe der Lieder eines Genres nicht mehr benötigt werden
-                Suche.textContent = "";
-                answerTitel.textContent = "";
-                answerMusician.textContent = "";
-                answerDate.textContent = "";
-                answerAlbum.textContent = "";
-                answerGenre.textContent = "";
-                answerURL.textContent = "";
-                answerURLTITEL.textContent = "";
-                answerSongTITEL.textContent = "";
-                answerAlbumTITEL.textContent = "";
-                answerGenreTITEL.textContent = "";
-                answerErscheinungsdatumTITEL.textContent = "";
-                answerMusikerTITEL.textContent = "";
-
-                let resultString = "";
-                for (let i = 0; i < json.length; i++) {
-                    resultString += "\n" + json[i].Titel;
-                }
-
-                Genrelist.textContent = resultString;
-                videoFrame.src = json[0].URL;
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-}
-
-//Wechsel auf die Homepage bzw. der kleineren Webseiten
-
-async function playlistswebsite() {
-    window.location.href = "Playlists.html";
-}
-
-async function impressumwebsite() {
-    window.location.href = "Impressum.html";
-}
-
-async function Homepage() {
-    window.location.href = "_dbquery.html";
-}
-
-//Login-Funktion
-
-async function login() {
-    try {
-        let passworthash = hashCode(passwort.value);
-        console.log(passworthash);
-
-        let response = await fetch(url + 'db/' + benutzername.value + '/' + passworthash);
-        if (response.ok) {
-            let json = await response.text();
-            console.log(`Message erhalten: ${json}`);
-
-            if (json === "Login erfolgreich") {
-                window.location.href = "_dbquery.html";
-            } else {
-                loginbestätigung.textContent = json;
-            }
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// Hash-Funktion
-
-function hashCode(str) {
-    let hash = 0;
-    for (let i = 0, len = str.length; i < len; i++) {
-        let chr = str.charCodeAt(i);
-        hash = (hash << 5) - hash + chr;
-        hash |= 0;
-    }
-    return hash;
-}
-
-//Funktion, um Song zu einer Playlist hinzuzufügen
-
-async function insertSong() {
-    try {
-        let response = await fetch(url + InsertTitel.value + '/' + InsertPlaylist.value);
-        if (response.ok) {
-            let json = await response.text();
-            playliständerung.textContent = json;
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-//Anzeige eines Songs in einer Playlist
-
-async function searchPlaylist() {
-    if (InsertPlaylist.value !== '') {
-        try {
-            let response = await fetch(url + InsertPlaylist.value);
-            if (response.ok) {
-                let json = await response.json();
-                let resultString = "";
-                for (let i = 0; i < json.length; i++) {
-                    resultString += json[i].Songs_Songname + ",\n";
-                }
-                Playlistlieder.textContent = resultString;
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }
-}
-
-//Funktion, um einer Playlist zu folgen
-
-async function followPlaylist() {
-    try {
-        let response = await fetch(url + 'Datenbank/Benutzer_Benutzername/' + InsertPlaylist.value);
-        if (response.ok) {
-            let json = await response.text();
-            playliständerung.textContent = json;
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// Funktion, um eine Playlist anzuzeigen
-
-async function showPlaylist() {
-    try {
-        let response = await fetch(url + 'Datenbank/likes/Benutzer/Playlists');
-        if (response.ok) {
-            let json = await response.json();
-            let resultString = "";
-            for (let i = 0; i < json.length; i++) {
-                resultString += json[i].Playlists_Playlistname + ",\n";
-            }
-            Playlistlieder.textContent = resultString;
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
+    <!-- Eingebetteter YouTube-Player (Mit dem Platzhalter-Video, das ganz zu Beginn auftaucht) -->
+    <iframe 
+      id="URL" 
+      width="560" 
+      height="315" 
+      style="justify-content: center; display: flex;" 
+      src="https://www.youtube.com/embed/1JPwiLeo4WY?si=BBUravmbzrZBVw2t"
+      title="YouTube video player" 
+      frameborder="100" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+    </iframe>
+  </body>
+</html>
