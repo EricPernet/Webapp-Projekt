@@ -1,36 +1,41 @@
 <!-- 
 ============================================================================
 *    Dokumentname: login.html
-*    Beschreibung: html-Programm für die Login-Seite von Streamforge, Webprojekt FS2025
+*    Beschreibung: HTML-Datei für die Login-Seite von Streamforge (Webprojekt FS2025)
 *    Copyright:    keine
 *    Erstellt:     2025-04-30
 *    Autoren:      Kjell Mühlhoff, Eric Pernet
 ============================================================================
 -->
-<html>
 
+<html>
   <head>
     <meta charset="UTF-8">
-    <title>Streamforge - Login</title> 
+    <title>Streamforge - Login</title>
     <script src ="_dbquery.js" async> </script>
     <link rel="stylesheet" href="style.css"/>
   </head>
 
   <body>
-    <!--Überschrift zur Login-Aufforderung und Titel der Webseite-->
+
+    <!-- Titel der Seite -->
     <h1 data-text="StreamForge">StreamForge</h1>
     <h2> Bitte logge dich mit deinem Account ein</h2>
 
-    <!-- Eingabeaufforderung für den Benutzernamen -->
     <h3>Benutzername:</h3>
-    <input id="benutzername" placeholder="Gib deinen Benutzernamen ein">
 
-    <!-- Eingabeaufforderung für das Passwort -->
+    <!-- Eingabefeld für den Benutzernamen -->
+    <input id="benutzername" placeholder="Gib deinen Benutzernamen ein">
     <h3>Passwort:</h3>
+
+    <!-- Passwortfeld (Eingabe wird zensiert angezeigt) -->
     <input type="password" id="passwort" placeholder="Gib dein Passwort ein!">
 
-    <!-- Login-Button ruft beim Anklicken die Login-Funktion auf -->
-    <button id="Loginbutton" onclick="login();">Login</button>
-  </body>
+    <!-- Bereich für Rückmeldung beim Login -->
+    <p id="loginbestätigung"></p>
 
+    <!-- Löst Login-Funktion aus-->
+    <button id="Loginbutton" onclick="login();">Login</button>
+
+  </body>
 </html>
