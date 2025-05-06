@@ -1,0 +1,28 @@
+<!-- 
+============================================================================
+*    Dokumentname: Playlist.html
+*    Beschreibung: html-Programm für die Playlist-Seite von Streamforge, Webprojekt FS2025
+*    Copyright:    keine
+*    Erstellt:     2025-04-02
+*    Autoren:      Kjell Mühlhoff, Eric Pernet
+============================================================================
+-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Streamforge-Playlist</title>
+    <script src="_dbquery.js" defer></script>
+    <link rel="stylesheet" href="style.css"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <!--Eingabefelder und Suchknopf für das Hinzufügen von Songs in die persönliche Playlist-->
+    <h2>Playlist erstellen</h2>
+    <input id = "InsertTitel" placeholder="Titel der Playlist" >
+    <input id = "InsertPlaylist" placeholder="Gib eine deiner Playlists an!" >
+    <button id = "playlistbutton" onclick ="insertSong();">Erstellen</button>
+    <p id="playliständerung"></p>
+    <!--Knopf, um auf die Homepage zurück zu kommen-->
+    <a id="Homepagebutton" onclick = "Homepage();">⌂ Zurück zur Homepage</a>
+  </body>
+</html>
